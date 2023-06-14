@@ -8,6 +8,20 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
-      - name: Run a one-line script
-        run: echo running workflow in main branch
+      - run: eho "build started"
+      - run: echo "build completed"
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    if: ${{ always () }}
+    steps:
+      - run: echo "test started"
+      - run: echo "test completed"
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "deploy started"
+      - run: echo "deploy completed"
+    needs: test
