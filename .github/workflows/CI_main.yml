@@ -1,0 +1,19 @@
+name: main-workflow
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: first step
+        run: echo running workflow in main branch
+      - name: second step 
+        run: echo "hello from second condition based step"
+        if: runner.os == 'Linux'
+      - name: third step
+        run: echo "hello from 3rd step"
+        if: runner.os != 'Linux'
